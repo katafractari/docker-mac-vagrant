@@ -20,6 +20,11 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder env_share_path, env_share_path
   config.ssh.extra_args = ["-t", "cd #{env_share_path}; bash --login"]
 
+  config.vm.network "forwarded_port", guest: 5432, host: 5432
+  config.vm.network "forwarded_port", guest: 1111, host: 1111
+  config.vm.network "forwarded_port", guest: 6379, host: 6379
+  config.vm.network "forwarded_port", guest: 4566, host: 4566
+
   config.vm.provider "parallels" do |prl|
     prl.memory = env_ram
     prl.cpus = env_cpus
